@@ -7,14 +7,19 @@ public class MasterControl : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-	    foreach(Wire wire in outWires)
-        {
-            wire.TurnOn();
-        }
+	    
 	}
 	
 	// Update is called once per frame
 	void Update () {
 	
 	}
+
+    public void StartSecurity()
+    {
+        foreach (Wire wire in outWires)
+        {
+            wire.TurnOn();
+        }
+    }
 }

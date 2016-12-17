@@ -10,7 +10,7 @@ public class Computer : Toggleable
     /// </summary>
     public Wire inWire, outWire;
     public float timeMoleIsUp;
-    public float minTimeSinceLastOff = 0;
+    public float minTimeSinceLastOff = 0.6f;
 
     private float timeOfLastOff;
     private Coroutine moleTimer;
@@ -65,11 +65,13 @@ public class Computer : Toggleable
     {
         //TODO: graphic stuff
         isMoleUp = true;
+        moleTimer = StartCoroutine(MoleTimer());
     }
 
     public void SmashMole()
     {
         isMoleUp = false;
+        StopCoroutine(moleTimer);
         //TODO: graphic stuff
     }
 
@@ -96,6 +98,6 @@ public class Computer : Toggleable
     /// <returns>a bool determining if the mole can pop up</returns>
     public bool CanMolePopUp()
     {
-        return (!isOn && Time.time > minTimeSinceLastOff + timeOfLastOff );
+        return (!isOn && !isMoleUp && Time.time > minTimeSinceLastOff + timeOfLastOff );
     }
 }
