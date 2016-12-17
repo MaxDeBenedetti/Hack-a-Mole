@@ -55,6 +55,13 @@ Temporary Items
 /[Ll]ibrary/
 sysinfo.txt
 *.stackdump
+
+Hack-a-Mole/[Tt]emp/
+Hack-a-Mole/[Oo]bj/
+Hack-a-Mole/[Bb]uild
+Hack-a-Mole/[Ll]ibrary/
+Hack-a-Mole/sysinfo.txt
+Hack-a-Mole/*.stackdump
  
 # ============================================= #
 # Visual Studio / MonoDevelop / Rider generated #
