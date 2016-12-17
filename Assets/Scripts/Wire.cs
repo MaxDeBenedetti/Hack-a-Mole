@@ -7,21 +7,39 @@ public class Wire : Toggleable
 
     public bool isLive = false;
     public Toggleable endpoint;
+    [HideInInspector]
+    public Animator anim;
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
-    
+    public void Awake()
+    {
+        anim = gameObject.GetComponent<Animator>();
+    }
+
+
+    // Use this for initialization
+    void Start()
+    {
+        
+
+    }
+
+    public void FixedUpdate()
+    {
+        anim.SetFloat("EnergyStartPoint", WireAnimationController.singleton.cycleOffset);
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
+
 
     public override void TurnOn()
     {
-        if(endpoint != null)
+        isLive = true;
+        anim.SetTrigger("TurnOn");
+        if (endpoint != null)
         {
             endpoint.TurnOn();
         }
@@ -29,7 +47,9 @@ public class Wire : Toggleable
 
     public override void TurnOff()
     {
-        if(endpoint != null)
+        isLive = false;
+        anim.SetTrigger("TurnOff");
+        if (endpoint != null)
         {
             endpoint.TurnOff();
         }

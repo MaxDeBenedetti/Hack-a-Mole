@@ -10,20 +10,33 @@ public class Switch : Toggleable
 
     private int selectedWire;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start()
+    {
         selectedWire = 0;
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+    }
 
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
+
+    public void OnMouseDown()
+    {
+        Toggle();
+    }
+
+    /// <summary>
+    /// Changes the switches active wire
+    /// </summary>
     public void Toggle()
     {
-        if(inWire.isLive)
+
+        if (inWire.isLive)
         {
+
+            Debug.Log("clicked");
             outWires[selectedWire].TurnOff();
             selectedWire = (selectedWire + 1) % outWires.Length;
             outWires[selectedWire].TurnOn();
