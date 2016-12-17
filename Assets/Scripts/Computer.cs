@@ -8,7 +8,7 @@ public class Computer : Toggleable
     /// <summary>
     /// The wire going into the computer
     /// </summary>
-    public Wire inWire;
+    public Wire inWire, outWire;
 
     /// <summary>
     /// If the computer can be used to score
@@ -28,6 +28,11 @@ public class Computer : Toggleable
 
     public override void TurnOn()
     {
+        if(outWire != null)
+        {
+            outWire.TurnOn();
+        }
+
         if (isMoleUp && inWire)
         {
             GameController.singleton.score++;
@@ -36,6 +41,9 @@ public class Computer : Toggleable
 
     public override void TurnOff()
     {
-        throw new NotImplementedException();
+        if (outWire != null)
+        {
+            outWire.TurnOff();
+        }
     }
 }
