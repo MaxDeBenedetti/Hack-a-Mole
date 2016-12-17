@@ -21,6 +21,8 @@ public class GameController : MonoBehaviour
 
     public Animator anim;
 
+    private bool isPlaying;
+
     public void Awake()
     {
         singleton = this;
@@ -38,7 +40,13 @@ public class GameController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        timer = timer - Mathf.FloorToInt(Time.time - startTime);
+        if (!isPlaying)
+        {
+            if (Input.anyKey)
+            {
+                StartGame();
+            }
+        }
     }
 
     public void StartGame()
@@ -46,7 +54,7 @@ public class GameController : MonoBehaviour
         mc.StartSecurity();
         StartRandomMoles();
         anim.SetTrigger("PlayGame");
-        startTime = Time.time;
+        StartCoroutine(TickTimer());
     }
 
     public void StartRandomMoles()
@@ -129,6 +137,12 @@ public class GameController : MonoBehaviour
             yield return new WaitForSeconds(Random.Range(minRandTime, maxRandTime));
             PopUpAMole();
         }
+    }
+
+    public IEnumerator TickTimer()
+    {
+        yield return new WaitForSeconds(1.0f);
+        timer--;
     }
 
 }

@@ -8,7 +8,18 @@ public class Switch : Toggleable
     public Wire inWire;
     public Wire[] outWires;
 
+    public Sprite[] sprites;
+
+    private bool isUp = true;
+    private bool isBlue = false;
+
     private int selectedWire;
+    private SpriteRenderer sp;
+
+    public void Awake()
+    {
+        sp = gameObject.GetComponent<SpriteRenderer>();
+    }
 
     // Use this for initialization
     void Start()
@@ -32,7 +43,8 @@ public class Switch : Toggleable
     /// </summary>
     public void Toggle()
     {
-
+        isUp = !isUp;
+        ChangeSprite();
         if (inWire.isLive)
         {
 
@@ -45,11 +57,29 @@ public class Switch : Toggleable
 
     public override void TurnOn()
     {
+        isBlue = true;
+        ChangeSprite();
         outWires[selectedWire].TurnOn();
     }
 
     public override void TurnOff()
     {
+        isBlue = false;
+        ChangeSprite();
         outWires[selectedWire].TurnOff();
     }
+
+    public void ChangeSprite()
+    {
+        int selectedSprite = 0;
+        if (!isUp)
+        {
+            selectedSprite += 1;
+        }
+        if (isBlue)
+            selectedSprite += 2;
+        sp.sprite = sprites[selectedSprite];
+    }
+
+
 }

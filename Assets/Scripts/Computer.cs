@@ -12,6 +12,9 @@ public class Computer : Toggleable
     public float timeMoleIsUp;
     public float minTimeSinceLastOff = 0.6f;
 
+    public Sprite onSprite, offSprite;
+    public SpriteRenderer sp;
+
     private float timeOfLastOff;
     private Coroutine moleTimer;
 
@@ -23,20 +26,27 @@ public class Computer : Toggleable
 
     public bool isOn;
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+    public void Awake()
+    {
+        sp = gameObject.GetComponent<SpriteRenderer>();
+    }
+
+    // Use this for initialization
+    void Start()
+    {
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
 
     public override void TurnOn()
     {
         isOn = true;
-        Debug.Log(gameObject.name + " turned on");
+        sp.sprite = onSprite;
 
         if (isMoleUp)
         {
@@ -55,6 +65,7 @@ public class Computer : Toggleable
     {
         isOn = false;
         timeOfLastOff = Time.time;
+        sp.sprite = offSprite;
         if (outWire != null)
         {
             outWire.TurnOff();
@@ -98,6 +109,6 @@ public class Computer : Toggleable
     /// <returns>a bool determining if the mole can pop up</returns>
     public bool CanMolePopUp()
     {
-        return (!isOn && !isMoleUp && Time.time > minTimeSinceLastOff + timeOfLastOff );
+        return (!isOn && !isMoleUp && Time.time > minTimeSinceLastOff + timeOfLastOff);
     }
 }
