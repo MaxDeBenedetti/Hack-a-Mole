@@ -62,6 +62,8 @@ Hack-a-Mole/[Bb]uild
 Hack-a-Mole/[Ll]ibrary/
 Hack-a-Mole/sysinfo.txt
 Hack-a-Mole/*.stackdump
+
+[Bb]uilds
  
 # ============================================= #
 # Visual Studio / MonoDevelop / Rider generated #
