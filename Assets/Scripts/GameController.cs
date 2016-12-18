@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
@@ -24,7 +25,7 @@ public class GameController : MonoBehaviour
 
     public bool isPlaying;
 
-    public Text timerText, scoreText, missedText;
+    public Text timerText, scoreText, missedText, startText;
 
     public void Awake()
     {
@@ -43,6 +44,15 @@ public class GameController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (startText.text.Equals("End"))
+        {
+            if (Input.anyKey)
+            {
+                PlayerPrefs.SetInt("myScore", score);
+                SceneManager.LoadScene("HighScores");
+            }
+        }
+
         if (!isPlaying)
         {
             if (Input.anyKey)
@@ -51,22 +61,21 @@ public class GameController : MonoBehaviour
                 isPlaying = !isPlaying;
             }
         }
-        else
-        {
 
-        }
         timerText.text = "" + timer;
+        if (timer < 0)
+            timerText.text = "0";
         scoreText.text = "Score: " + score;
         missedText.text = "Missed: " + missed;
+
+        
     }
 
     public void StartGame()
     {
         mc.StartSecurity();
-        //StartRandomMoles();
-        //anim.SetTrigger("PlayGame");
         StartCoroutine(TickTimer());
-        //PopUpAMole();
+        startText.text = "";
     }
 
     public void StartRandomMoles()
@@ -183,5 +192,7 @@ public class GameController : MonoBehaviour
             yield return new WaitForSeconds(1.0f);
             timer--;
         }
+        isPlaying = false;
+        startText.text = "End";
     }
 }

@@ -58,7 +58,6 @@ public class Computer : Toggleable
         if (isMoleUp)
         {
             SmashMole();
-            GameController.singleton.score++;
         }
 
     }
@@ -75,15 +74,16 @@ public class Computer : Toggleable
     {
         sp.sprite = moleSprite;
         isMoleUp = true;
-        //moleTimer = StartCoroutine(MoleTimer());
         timeMolePoppedUp = Time.time;
+
+        
     }
 
     public void SmashMole()
     {
         isMoleUp = false;
-        Debug.Log("smashed");
-        //StopCoroutine(moleTimer);
+        if(GameController.singleton.isPlaying)
+            GameController.singleton.score++;
         //TODO: graphic stuff
     }
 
@@ -92,9 +92,12 @@ public class Computer : Toggleable
     /// </summary>
     public void PopDownMole()
     {
-        isMoleUp = false;
-        GameController.singleton.missed++;
-        sp.sprite = offSprite;
+        if (GameController.singleton.isPlaying)
+        {
+            isMoleUp = false;
+            GameController.singleton.missed++;
+            sp.sprite = offSprite;
+        }
     }
 
     public IEnumerator MoleTimer()
