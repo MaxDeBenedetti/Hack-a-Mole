@@ -6,14 +6,17 @@ public class Computer : Toggleable
 {
 
 
-    public float timeMoleIsUp;
+    public float timeMoleIsUp = 2f;
     public float minTimeSinceLastOff = 0.6f;
 
-    public Sprite onSprite, offSprite;
+    public Sprite onSprite, offSprite, moleSprite;
+    [HideInInspector]
     public SpriteRenderer sp;
 
     private float timeOfLastOff;
     private Coroutine moleTimer;
+
+    private float timeMolePoppedUp;
 
     /// <summary>
     /// If the computer can be used to score
@@ -37,7 +40,14 @@ public class Computer : Toggleable
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKey(KeyCode.N))
+            PopUpMole();
+        if (isMoleUp && (Time.time > timeMolePoppedUp + timeMoleIsUp))
+            PopDownMole();
 
+        float dieRoll = UnityEngine.Random.value;
+        if (GameController.singleton.isPlaying && CanMolePopUp() && dieRoll < 0.002f)
+            PopUpMole();
     }
 
     public override void TurnOn()
@@ -63,15 +73,17 @@ public class Computer : Toggleable
 
     public void PopUpMole()
     {
-        //TODO: graphic stuff
+        sp.sprite = moleSprite;
         isMoleUp = true;
-        moleTimer = StartCoroutine(MoleTimer());
+        //moleTimer = StartCoroutine(MoleTimer());
+        timeMolePoppedUp = Time.time;
     }
 
     public void SmashMole()
     {
         isMoleUp = false;
-        StopCoroutine(moleTimer);
+        Debug.Log("smashed");
+        //StopCoroutine(moleTimer);
         //TODO: graphic stuff
     }
 
@@ -82,7 +94,7 @@ public class Computer : Toggleable
     {
         isMoleUp = false;
         GameController.singleton.missed++;
-        //TODO: graphic stuff
+        sp.sprite = offSprite;
     }
 
     public IEnumerator MoleTimer()
@@ -98,6 +110,6 @@ public class Computer : Toggleable
     /// <returns>a bool determining if the mole can pop up</returns>
     public bool CanMolePopUp()
     {
-        return (!isOn && !isMoleUp && Time.time > minTimeSinceLastOff + timeOfLastOff);
+        return (!isOn && !isMoleUp && (Time.time > (minTimeSinceLastOff + timeOfLastOff)));
     }
 }

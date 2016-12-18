@@ -49,22 +49,33 @@ public class Switch : Toggleable
             selectedWire = (selectedWire + 1) % groups.Length;
             groups[selectedWire].TurnOnGroup();
         }
+        //switch while off, not entirely sure I want to do this
+        else if(!(groups.Length == 0))
+        {
+            selectedWire = (selectedWire + 1) % groups.Length;
+        }
     }
 
     public override void TurnOn()
     {
-        isBlue = true;
-        ChangeSprite();
-        if(groups.Length > 0)
-            groups[selectedWire].TurnOnGroup();
+        if (!isBlue)
+        {
+            isBlue = true;
+            ChangeSprite();
+            if (groups.Length > 0)
+                groups[selectedWire].TurnOnGroup();
+        }
     }
 
     public override void TurnOff()
     {
-        isBlue = false;
-        ChangeSprite();
-        if (groups.Length > 0)
-            groups[selectedWire].TurnOffGroup();
+        if (isBlue)
+        {
+            isBlue = false;
+            ChangeSprite();
+            if (groups.Length > 0)
+                groups[selectedWire].TurnOffGroup();
+        }
     }
 
     public void ChangeSprite()

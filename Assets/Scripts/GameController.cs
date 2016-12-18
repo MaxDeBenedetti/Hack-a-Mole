@@ -21,7 +21,7 @@ public class GameController : MonoBehaviour
 
     public Animator anim;
 
-    private bool isPlaying;
+    public bool isPlaying;
 
     public void Awake()
     {
@@ -48,14 +48,19 @@ public class GameController : MonoBehaviour
                 isPlaying = !isPlaying;
             }
         }
+        else
+        {
+
+        }
     }
 
     public void StartGame()
     {
         mc.StartSecurity();
         //StartRandomMoles();
-        anim.SetTrigger("PlayGame");
+        //anim.SetTrigger("PlayGame");
         StartCoroutine(TickTimer());
+        //PopUpAMole();
     }
 
     public void StartRandomMoles()
@@ -66,10 +71,12 @@ public class GameController : MonoBehaviour
     /// <summary>
     /// PopUps a single mole
     /// </summary>
-    public void PopUpAMole()
+    public int PopUpAMole()
     {
+        Debug.Log("Pop UP");
         bool hasNotChanged = true;
         Computer comp;
+        int i = 0;
         do
         {
             comp = comps[Random.Range(0, comps.Length - 1)];
@@ -77,14 +84,26 @@ public class GameController : MonoBehaviour
             {
                 comp.PopUpMole();
                 hasNotChanged = false;
+                if (i < comps.Length)
+                {
+                    i++;
+                }
+                else
+                {
+                    hasNotChanged = false;
+                }
             }
         } while (hasNotChanged);
+        Debug.Log("pop out");
+        return 1;
     }
 
-    public void PopUpAMoleIgnoreRules()
+    public int PopUpAMoleIgnoreRules()
     {
+        Debug.Log("pop up");
         bool hasNotChanged = true;
         Computer comp;
+        int i = 0;
         do
         {
             comp = comps[Random.Range(0, comps.Length - 1)];
@@ -92,8 +111,18 @@ public class GameController : MonoBehaviour
             {
                 comp.PopUpMole();
                 hasNotChanged = false;
+                if(i < comps.Length)
+                {
+                    i++;
+                }
+                else
+                {
+                    hasNotChanged = false;
+                }
             }
         } while (hasNotChanged);
+        Debug.Log("pop out");
+        return 1;
     }
 
     /// <summary>
@@ -135,15 +164,18 @@ public class GameController : MonoBehaviour
     {
         while (timer >= 0)
         {
-            yield return new WaitForSeconds(Random.Range(minRandTime, maxRandTime));
-            PopUpAMole();
+            yield return new WaitForSeconds(0.3f);
+            int blah = PopUpAMoleIgnoreRules();
+            Debug.Log("random mole "+ blah);
         }
     }
 
     public IEnumerator TickTimer()
     {
-        yield return new WaitForSeconds(1.0f);
-        timer--;
+        while (timer >= 0)
+        {
+            yield return new WaitForSeconds(1.0f);
+            timer--;
+        }
     }
-
 }

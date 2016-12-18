@@ -40,6 +40,7 @@ public class ToggleGroup : MonoBehaviour {
 
     public void TurnOnGroup()
     {
+        isOn = true;
         foreach (Toggleable toggle in toggles)
         {
             if (toggle != null)
@@ -49,6 +50,7 @@ public class ToggleGroup : MonoBehaviour {
 
     public void TurnOffGroup()
     {
+        isOn = false;
         foreach (Toggleable toggle in toggles)
         {
             if (toggle != null)
