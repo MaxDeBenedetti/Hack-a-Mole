@@ -11,7 +11,7 @@ public class GameController : MonoBehaviour
     public int score = 0;
     public int missed = 0;
 
-    public int timer = 60;
+    public int timer = 45;
     public float minRandTime = 0.05f;
     public float maxRandTime = 1f;
 
