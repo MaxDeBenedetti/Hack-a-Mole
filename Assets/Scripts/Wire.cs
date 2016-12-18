@@ -39,19 +39,11 @@ public class Wire : Toggleable
     {
         isLive = true;
         anim.SetTrigger("TurnOn");
-        if (endpoint != null)
-        {
-            endpoint.TurnOn();
-        }
     }
 
     public override void TurnOff()
     {
         isLive = false;
         anim.SetTrigger("TurnOff");
-        if (endpoint != null)
-        {
-            endpoint.TurnOff();
-        }
     }
 }

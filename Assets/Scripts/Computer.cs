@@ -5,10 +5,7 @@ using System;
 public class Computer : Toggleable
 {
 
-    /// <summary>
-    /// The wire going into the computer
-    /// </summary>
-    public Wire inWire, outWire;
+
     public float timeMoleIsUp;
     public float minTimeSinceLastOff = 0.6f;
 
@@ -54,11 +51,6 @@ public class Computer : Toggleable
             GameController.singleton.score++;
         }
 
-        if (outWire != null)
-        {
-            outWire.TurnOn();
-        }
-
     }
 
     public override void TurnOff()
@@ -66,10 +58,7 @@ public class Computer : Toggleable
         isOn = false;
         timeOfLastOff = Time.time;
         sp.sprite = offSprite;
-        if (outWire != null)
-        {
-            outWire.TurnOff();
-        }
+        
     }
 
     public void PopUpMole()

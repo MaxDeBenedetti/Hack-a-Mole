@@ -45,6 +45,7 @@ public class GameController : MonoBehaviour
             if (Input.anyKey)
             {
                 StartGame();
+                isPlaying = !isPlaying;
             }
         }
     }
@@ -52,7 +53,7 @@ public class GameController : MonoBehaviour
     public void StartGame()
     {
         mc.StartSecurity();
-        StartRandomMoles();
+        //StartRandomMoles();
         anim.SetTrigger("PlayGame");
         StartCoroutine(TickTimer());
     }

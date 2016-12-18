@@ -25,6 +25,6 @@ public class WireAnimationController : MonoBehaviour
 
     public void FixedUpdate()
     {
-        cycleOffset = Mathf.Repeat(Time.time, 1.0f);
+        //cycleOffset = Mathf.Repeat(Time.time, 1.0f);
     }
 }

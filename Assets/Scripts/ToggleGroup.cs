@@ -3,6 +3,10 @@ using System.Collections;
 
 public class ToggleGroup : MonoBehaviour {
 
+    public Toggleable[] toggles;
+
+    private bool isOn = false;
+
 	// Use this for initialization
 	void Start () {
 	
@@ -12,4 +16,43 @@ public class ToggleGroup : MonoBehaviour {
 	void Update () {
 	
 	}
+
+    public void ToggleTheGroup()
+    {
+        isOn = !isOn;
+        if (isOn)
+        {
+            foreach(Toggleable toggle in toggles)
+            {
+                if(toggle != null)
+                    toggle.TurnOn();
+            }
+        }
+        else
+        {
+            foreach (Toggleable toggle in toggles)
+            {
+                if (toggle != null)
+                    toggle.TurnOff();
+            }
+        }
+    }
+
+    public void TurnOnGroup()
+    {
+        foreach (Toggleable toggle in toggles)
+        {
+            if (toggle != null)
+                toggle.TurnOn();
+        }
+    }
+
+    public void TurnOffGroup()
+    {
+        foreach (Toggleable toggle in toggles)
+        {
+            if (toggle != null)
+                toggle.TurnOff();
+        }
+    }
 }

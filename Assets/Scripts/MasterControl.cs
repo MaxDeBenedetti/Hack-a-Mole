@@ -3,7 +3,7 @@ using System.Collections;
 
 public class MasterControl : MonoBehaviour {
 
-    public Wire[] outWires;
+    public ToggleGroup firstGroup;
 
 	// Use this for initialization
 	void Start () {
@@ -17,9 +17,6 @@ public class MasterControl : MonoBehaviour {
 
     public void StartSecurity()
     {
-        foreach (Wire wire in outWires)
-        {
-            wire.TurnOn();
-        }
+        firstGroup.TurnOnGroup();
     }
 }

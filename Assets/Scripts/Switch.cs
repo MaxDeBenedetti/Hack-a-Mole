@@ -4,10 +4,7 @@ using System;
 
 public class Switch : Toggleable
 {
-
-    public Wire inWire;
-    public Wire[] outWires;
-
+    public ToggleGroup[] groups;
     public Sprite[] sprites;
 
     private bool isUp = true;
@@ -35,6 +32,7 @@ public class Switch : Toggleable
 
     public void OnMouseDown()
     {
+        Debug.Log("clicked");
         Toggle();
     }
 
@@ -45,13 +43,11 @@ public class Switch : Toggleable
     {
         isUp = !isUp;
         ChangeSprite();
-        if (inWire.isLive)
+        if (isBlue  && !(groups.Length == 0))
         {
-
-            Debug.Log("clicked");
-            outWires[selectedWire].TurnOff();
-            selectedWire = (selectedWire + 1) % outWires.Length;
-            outWires[selectedWire].TurnOn();
+            groups[selectedWire].TurnOffGroup();
+            selectedWire = (selectedWire + 1) % groups.Length;
+            groups[selectedWire].TurnOnGroup();
         }
     }
 
@@ -59,14 +55,16 @@ public class Switch : Toggleable
     {
         isBlue = true;
         ChangeSprite();
-        outWires[selectedWire].TurnOn();
+        if(groups.Length > 0)
+            groups[selectedWire].TurnOnGroup();
     }
 
     public override void TurnOff()
     {
         isBlue = false;
         ChangeSprite();
-        outWires[selectedWire].TurnOff();
+        if (groups.Length > 0)
+            groups[selectedWire].TurnOffGroup();
     }
 
     public void ChangeSprite()
