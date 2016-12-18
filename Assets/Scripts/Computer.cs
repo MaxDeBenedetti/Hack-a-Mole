@@ -46,7 +46,7 @@ public class Computer : Toggleable
             PopDownMole();
 
         float dieRoll = UnityEngine.Random.value;
-        if (GameController.singleton.isPlaying && CanMolePopUp() && dieRoll < 0.002f)
+        if (GameController.singleton.isPlaying && CanMolePopUp() && dieRoll < 0.001f)
             PopUpMole();
     }
 

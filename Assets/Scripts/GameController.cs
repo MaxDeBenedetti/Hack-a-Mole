@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
@@ -22,6 +23,8 @@ public class GameController : MonoBehaviour
     public Animator anim;
 
     public bool isPlaying;
+
+    public Text timerText, scoreText, missedText;
 
     public void Awake()
     {
@@ -52,6 +55,9 @@ public class GameController : MonoBehaviour
         {
 
         }
+        timerText.text = "" + timer;
+        scoreText.text = "Score: " + score;
+        missedText.text = "Missed: " + missed;
     }
 
     public void StartGame()
