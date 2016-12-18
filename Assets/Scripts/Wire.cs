@@ -6,7 +6,6 @@ public class Wire : Toggleable
 {
 
     public bool isLive = false;
-    public Toggleable endpoint;
     [HideInInspector]
     public Animator anim;
 

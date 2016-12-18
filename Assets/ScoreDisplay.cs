@@ -18,6 +18,6 @@ public class ScoreDisplay : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         if (Input.anyKey)
-            SceneManager.LoadScene("main");
+            SceneManager.LoadScene("Start");
     }
 }

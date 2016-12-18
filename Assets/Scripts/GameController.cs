@@ -27,12 +27,13 @@ public class GameController : MonoBehaviour
 
     public Text timerText, scoreText, missedText, startText;
 
+    private AudioSource backGroundMusic;
+
     public void Awake()
     {
         singleton = this;
-        comps = GameObject.FindObjectsOfType<Computer>();
-        anim = gameObject.GetComponent<Animator>();
         mc = GameObject.FindObjectOfType<MasterControl>();
+        backGroundMusic = gameObject.GetComponent<AudioSource>();
     }
 
     // Use this for initialization
@@ -76,6 +77,7 @@ public class GameController : MonoBehaviour
         mc.StartSecurity();
         StartCoroutine(TickTimer());
         startText.text = "";
+        backGroundMusic.Play();
     }
 
     public void StartRandomMoles()

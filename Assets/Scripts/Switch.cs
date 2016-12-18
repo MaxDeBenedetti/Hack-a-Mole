@@ -13,9 +13,12 @@ public class Switch : Toggleable
     private int selectedWire;
     private SpriteRenderer sp;
 
+    private AudioSource switchSound;
+
     public void Awake()
     {
         sp = gameObject.GetComponent<SpriteRenderer>();
+        switchSound = gameObject.GetComponent<AudioSource>();
     }
 
     // Use this for initialization
@@ -32,7 +35,7 @@ public class Switch : Toggleable
 
     public void OnMouseDown()
     {
-        Debug.Log("clicked");
+        switchSound.Play();
         Toggle();
     }
 
