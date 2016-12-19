@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine.SceneManagement;
 
-public class LoadGame : MonoBehaviour {
+public class AnykeyStartScreen : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
@@ -11,9 +11,12 @@ public class LoadGame : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (Input.anyKey) {
-            SceneManager.LoadScene("main");
-        }
-
+        if (Input.anyKey)
+            LoadStart();
 	}
+
+    public void LoadStart()
+    {
+        SceneManager.LoadScene("Start");
+    }
 }
